@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const navLinks = [
-    { label: "Home", href: "#" },
-    { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "/" },
+    { label: "Search", href: "/search" },
+    { label: "Features", href: "/features" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
@@ -17,23 +19,23 @@ const Navbar = () => {
       <nav className="section-container">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-midnight rounded-lg flex items-center justify-center">
               <span className="text-cloud font-bold text-lg">R</span>
             </div>
             <span className="text-midnight font-semibold text-xl">RankLocal</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                className="text-midnight/70 hover:text-midnight font-medium transition-colors"
+                to={link.href}
+                className={`font-medium transition-colors ${location.pathname === link.href ? 'text-midnight' : 'text-midnight/70 hover:text-midnight'}`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -65,14 +67,14 @@ const Navbar = () => {
           <div className="lg:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
-                  className="text-midnight/70 hover:text-midnight font-medium transition-colors py-2"
+                  to={link.href}
+                  className={`font-medium transition-colors py-2 ${location.pathname === link.href ? 'text-midnight' : 'text-midnight/70 hover:text-midnight'}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
                 <button className="text-midnight/70 hover:text-midnight font-medium transition-colors py-2 text-left">
