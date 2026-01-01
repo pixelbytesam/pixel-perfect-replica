@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import Features from "./pages/Features";
 import Feedback from "./pages/Feedback";
 import Search from "./pages/Search";
+import Compare from "./pages/Compare";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/features" element={<Features />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/compare" element={<Compare />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
