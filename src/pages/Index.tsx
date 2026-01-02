@@ -12,6 +12,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import CTASection from "@/components/CTASection";
 import CategoriesSection from "@/components/CategoriesSection";
 import Footer from "@/components/Footer";
+import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
 
 const Index = () => {
   return (
@@ -19,17 +20,39 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <LogosSection />
-        <MetricsSection />
-        <SearchSection />
-        <FeaturesSection />
-        <IntelligenceSection />
-        <HowItWorksSection />
-        <ComparisonSection />
-        <WhyChooseSection />
-        <TestimonialsSection />
-        <CTASection />
-        <CategoriesSection />
+        <ScrollAnimationWrapper>
+          <LogosSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <MetricsSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <SearchSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <FeaturesSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <IntelligenceSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <HowItWorksSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <ComparisonSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <WhyChooseSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <TestimonialsSection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <CTASection />
+        </ScrollAnimationWrapper>
+        <ScrollAnimationWrapper>
+          <CategoriesSection />
+        </ScrollAnimationWrapper>
       </main>
       <Footer />
     </div>
