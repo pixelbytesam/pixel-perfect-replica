@@ -82,7 +82,7 @@ const TestimonialsSection = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="flex-[0_0_100%] min-w-0 md:flex-[0_0_33.333%] px-3"
+                className="flex-[0_0_100%] min-w-0 px-3"
               >
                 <div className="bg-background rounded-2xl p-6 shadow-card h-full">
                   <div className="flex items-center gap-1 mb-4">
