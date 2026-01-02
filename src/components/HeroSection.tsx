@@ -1,7 +1,11 @@
 import avatar1 from "@/assets/avatar-1.jpg";
 import avatar2 from "@/assets/avatar-2.jpg";
+import AnimatedWord from "@/components/AnimatedWord";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HeroSection = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="relative pt-24 lg:pt-32 pb-16 lg:pb-24 overflow-hidden">
       {/* Decorative blocks */}
@@ -13,34 +17,30 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center relative">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-card rounded-full px-4 py-2 mb-6 shadow-card">
-            <span className="text-forest text-sm font-medium">✓ Trusted by thousands</span>
+            <span className="text-forest text-sm font-medium">{t.trustedByThousands}</span>
           </div>
           
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-midnight leading-tight mb-6">
-            Choosing the Right{" "}
-            <span className="relative inline-block">
-              Hospital,
-              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
-                <path d="M2 8C50 3 150 3 198 8" stroke="hsl(143, 21%, 38%)" strokeWidth="3" strokeLinecap="round"/>
-              </svg>
-            </span>
+            {t.heroHeadline1}{" "}
+            <AnimatedWord />
+            ,
             <br />
-            Your journey starts here.
+            {t.heroHeadline2}
           </h1>
           
           {/* Subheading */}
           <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            We help you find the perfect local services by comparing reviews, ratings, and quality metrics all in one place.
+            {t.heroSubheading}
           </p>
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <button className="btn-forest px-8 py-4 text-lg">
-              Get Started Today
+              {t.getStartedToday}
             </button>
             <button className="btn-outline px-8 py-4 text-lg">
-              Learn More
+              {t.learnMore}
             </button>
           </div>
           
