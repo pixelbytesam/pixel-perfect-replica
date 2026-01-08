@@ -1,16 +1,17 @@
-import { Users, TrendingUp, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { CheckCircle, Building2, Star } from "lucide-react";
 
 const MetricsSection = () => {
   const metrics = [
     {
-      icon: Users,
+      icon: CheckCircle,
       value: "25K+",
-      label: "Active Users",
+      label: "Active Comparisons",
     },
     {
-      icon: TrendingUp,
+      icon: Building2,
       value: "1M+",
-      label: "Comparisons Made",
+      label: "Total Businesses",
     },
     {
       icon: Star,
@@ -20,33 +21,75 @@ const MetricsSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-20">
-      <div className="section-container">
-        <div className="text-center mb-12">
+    <section className="py-16 lg:py-20 relative overflow-hidden">
+      {/* Decorative floating blocks */}
+      <motion.div 
+        className="absolute top-8 left-[15%] w-12 h-12 bg-forest/15 rounded-lg hidden lg:block"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute top-20 right-[10%] w-10 h-10 bg-forest/20 rounded-lg hidden lg:block"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      />
+      <motion.div 
+        className="absolute bottom-16 left-[8%] w-8 h-8 bg-forest/25 rounded-lg hidden lg:block"
+        animate={{ y: [0, -5, 0] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+      <motion.div 
+        className="absolute top-1/2 right-[5%] w-14 h-14 bg-forest/15 rounded-lg hidden lg:block"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+      />
+      <motion.div 
+        className="absolute top-32 left-[45%] w-8 h-8 bg-forest/20 rounded-lg hidden lg:block"
+        animate={{ y: [0, -4, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+      />
+      <motion.div 
+        className="absolute top-28 left-[52%] w-10 h-10 bg-forest/15 rounded-lg hidden lg:block"
+        animate={{ y: [0, 5, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+      />
+      
+      <div className="section-container relative z-10">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           <h2 className="text-3xl lg:text-4xl font-bold text-midnight mb-4">
             Metrics that matters!
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Our platform helps thousands of users make informed decisions every day.
+          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Key performance indicators that deliver real insight. Focused on outcomes that truly matter. Clear, actionable metrics that guide smarter decisions.
           </p>
-        </div>
+        </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-20 max-w-4xl mx-auto">
           {metrics.map((metric, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-card rounded-2xl p-8 text-center shadow-card hover:shadow-lg transition-shadow"
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
             >
-              <div className="w-14 h-14 bg-forest/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <metric.icon className="w-7 h-7 text-forest" />
+              <div className="flex items-center gap-3 mb-2">
+                <metric.icon className="w-6 h-6 text-forest" strokeWidth={1.5} />
+                <span className="text-4xl lg:text-5xl font-bold text-forest">
+                  {metric.value}
+                </span>
               </div>
-              <div className="text-4xl lg:text-5xl font-bold text-midnight mb-2">
-                {metric.value}
-              </div>
-              <div className="text-muted-foreground font-medium">
+              <span className="text-muted-foreground text-sm font-medium">
                 {metric.label}
-              </div>
-            </div>
+              </span>
+            </motion.div>
           ))}
         </div>
       </div>
