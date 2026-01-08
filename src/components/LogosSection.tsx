@@ -4,8 +4,8 @@ const LogosSection = () => {
   const companies = ["Company", "Company", "Company", "Company"];
 
   return (
-    <section className="py-10 lg:py-14 relative overflow-hidden">
-      {/* Decorative blocks */}
+    <section className="py-6 xs:py-8 sm:py-10 lg:py-14 relative overflow-hidden">
+      {/* Decorative blocks - Hidden on small screens */}
       <motion.div 
         className="absolute top-4 left-[20%] w-10 h-10 bg-forest/15 rounded-lg hidden lg:block"
         animate={{ y: [0, -5, 0] }}
@@ -19,7 +19,7 @@ const LogosSection = () => {
       
       <div className="section-container">
         <motion.div 
-          className="flex items-center justify-center gap-12 lg:gap-24 flex-wrap"
+          className="flex items-center justify-center gap-6 xs:gap-8 sm:gap-12 lg:gap-24 flex-wrap"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -28,7 +28,7 @@ const LogosSection = () => {
           {companies.map((company, index) => (
             <motion.span
               key={index}
-              className="text-2xl lg:text-3xl font-semibold text-forest/40"
+              className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold text-forest/40"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

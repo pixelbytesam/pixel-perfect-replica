@@ -50,22 +50,22 @@ const TestimonialsSection = () => {
   }, [emblaApi, isPaused]);
 
   return (
-    <section className="py-16 lg:py-24 bg-card">
+    <section className="py-12 xs:py-16 lg:py-24 bg-card">
       <div className="section-container">
-        <div className="flex items-center justify-between mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-midnight">
+        <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-4 xs:gap-6 mb-8 xs:mb-10 sm:mb-12">
+          <h2 className="text-[clamp(1.25rem,4.5vw,2.25rem)] font-bold text-midnight">
             Loved by Clients Everywhere
           </h2>
-          <div className="hidden md:flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <button 
               onClick={scrollPrev}
-              className="w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center hover:bg-forest hover:text-white hover:border-forest transition-colors"
+              className="w-10 h-10 xs:w-10 xs:h-10 bg-background border border-border rounded-full flex items-center justify-center hover:bg-forest hover:text-white hover:border-forest transition-colors min-h-[44px] min-w-[44px]"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button 
               onClick={scrollNext}
-              className="w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center hover:bg-forest hover:text-white hover:border-forest transition-colors"
+              className="w-10 h-10 xs:w-10 xs:h-10 bg-background border border-border rounded-full flex items-center justify-center hover:bg-forest hover:text-white hover:border-forest transition-colors min-h-[44px] min-w-[44px]"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -82,26 +82,26 @@ const TestimonialsSection = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="flex-[0_0_100%] min-w-0 px-3"
+                className="flex-[0_0_100%] min-w-0 px-1.5 xs:px-3"
               >
-                <div className="bg-background rounded-2xl p-6 shadow-card h-full">
-                  <div className="flex items-center gap-1 mb-4">
+                <div className="bg-background rounded-xl xs:rounded-2xl p-4 xs:p-6 shadow-card h-full">
+                  <div className="flex items-center gap-0.5 xs:gap-1 mb-3 xs:mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="w-4 h-4 xs:w-5 xs:h-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-midnight/80 mb-6 leading-relaxed">
+                  <p className="text-midnight/80 mb-4 xs:mb-6 leading-relaxed text-sm xs:text-base">
                     "{testimonial.text}"
                   </p>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2.5 xs:gap-3">
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
+                      className="w-10 h-10 xs:w-12 xs:h-12 rounded-full object-cover shrink-0"
                     />
-                    <div>
-                      <div className="font-semibold text-midnight">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">Verified User</div>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-midnight text-sm xs:text-base truncate">{testimonial.name}</div>
+                      <div className="text-xs xs:text-sm text-muted-foreground">Verified User</div>
                     </div>
                   </div>
                 </div>

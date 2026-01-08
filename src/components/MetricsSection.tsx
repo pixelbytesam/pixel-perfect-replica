@@ -21,8 +21,8 @@ const MetricsSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-20 relative overflow-hidden">
-      {/* Decorative floating blocks */}
+    <section className="py-12 xs:py-14 sm:py-16 lg:py-20 relative overflow-hidden">
+      {/* Decorative floating blocks - Hidden on small screens */}
       <motion.div 
         className="absolute top-8 left-[15%] w-12 h-12 bg-forest/15 rounded-lg hidden lg:block"
         animate={{ y: [0, -6, 0] }}
@@ -56,21 +56,21 @@ const MetricsSection = () => {
       
       <div className="section-container relative z-10">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-8 xs:mb-10 sm:mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-midnight mb-4">
+          <h2 className="text-[clamp(1.5rem,5vw,2.25rem)] font-bold text-midnight mb-3 xs:mb-4">
             Metrics that matters!
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm xs:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed px-2">
             Key performance indicators that deliver real insight. Focused on outcomes that truly matter. Clear, actionable metrics that guide smarter decisions.
           </p>
         </motion.div>
         
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-20 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 xs:grid-cols-3 gap-8 xs:gap-6 sm:gap-8 md:gap-12 lg:gap-20 max-w-4xl mx-auto">
           {metrics.map((metric, index) => (
             <motion.div
               key={index}
@@ -80,13 +80,13 @@ const MetricsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
             >
-              <div className="flex items-center gap-3 mb-2">
-                <metric.icon className="w-6 h-6 text-forest" strokeWidth={1.5} />
-                <span className="text-4xl lg:text-5xl font-bold text-forest">
+              <div className="flex items-center gap-2 xs:gap-3 mb-1.5 xs:mb-2">
+                <metric.icon className="w-5 h-5 xs:w-6 xs:h-6 text-forest shrink-0" strokeWidth={1.5} />
+                <span className="text-[clamp(1.75rem,6vw,3rem)] font-bold text-forest">
                   {metric.value}
                 </span>
               </div>
-              <span className="text-muted-foreground text-sm font-medium">
+              <span className="text-muted-foreground text-xs xs:text-sm font-medium">
                 {metric.label}
               </span>
             </motion.div>
