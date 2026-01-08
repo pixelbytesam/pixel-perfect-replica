@@ -84,12 +84,19 @@
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground font-bricolage antialiased;
-  }
-
   html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-bricolage antialiased;
+    min-width: 220px;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-width: 220px;
+    overflow-x: hidden;
   }
 }
 
