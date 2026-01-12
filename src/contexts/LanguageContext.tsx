@@ -1,6 +1,9 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type Language = 'en' | 'hi' | 'mr';
+
+const LANGUAGE_STORAGE_KEY = 'app-selected-language';
+const DEFAULT_LANGUAGE: Language = 'en';
 
 interface Translations {
   // Navbar
@@ -139,7 +142,23 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY) as Language;
+      if (stored && ['en', 'hi', 'mr'].includes(stored)) {
+        return stored;
+      }
+    }
+    return DEFAULT_LANGUAGE;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+  }, [language]);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+  };
   
   const t = translations[language];
   
