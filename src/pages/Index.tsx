@@ -13,10 +13,17 @@ import CTASection from "@/components/CTASection";
 import CategoriesSection from "@/components/CategoriesSection";
 import Footer from "@/components/Footer";
 import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
+import SEOHead from "@/components/SEOHead";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="RankLocal - Find & Compare Trusted Local Services"
+        description="Discover and compare trusted local services in your area. From hospitals to restaurants, RankLocal helps you make informed decisions with verified reviews and ratings."
+        canonical="https://ranklocal.com"
+        keywords="local services, compare businesses, trusted reviews, local business ratings, find services near me"
+      />
       <Navbar />
       <main>
         <HeroSection />

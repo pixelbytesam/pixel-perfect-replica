@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { Target, Eye, Mail, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import aboutHero from "@/assets/about-hero.jpg";
@@ -25,6 +26,12 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="About RankLocal - Our Mission & Vision"
+        description="Learn about RankLocal's mission to make local shopping transparent and empowered. Discover our core values and commitment to verified listings."
+        canonical="https://ranklocal.com/about"
+        keywords="about ranklocal, local services, transparent marketplace, verified businesses"
+      />
       <Navbar />
       
       {/* Hero Section */}

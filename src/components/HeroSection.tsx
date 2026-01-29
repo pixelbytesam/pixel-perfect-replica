@@ -1,14 +1,12 @@
 import { motion } from "framer-motion";
 import { Search, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import avatar1 from "@/assets/avatar-1.jpg";
 import avatar2 from "@/assets/avatar-2.jpg";
 import avatar3 from "@/assets/avatar-3.jpg";
 import AnimatedWord from "@/components/AnimatedWord";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 const HeroSection = () => {
-  const { t } = useLanguage();
-  
   return (
     <section className="relative pt-24 xs:pt-28 lg:pt-36 pb-12 xs:pb-16 lg:pb-24 overflow-hidden">
       {/* SVG Grid Background */}
@@ -71,11 +69,11 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {t.heroHeadline1}{" "}
+            Find Best{" "}
             <span className="text-forest"><AnimatedWord /></span>,
             <br className="hidden xs:block" />
             <span className="xs:hidden"> </span>
-            {t.heroHeadline2}
+            Anytime, Anywhere
           </motion.h1>
           
           {/* Subheading */}
@@ -95,14 +93,24 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-forest text-white rounded-full px-6 xs:px-8 py-3.5 xs:py-4 font-medium text-sm xs:text-base transition-all hover:opacity-90 hover:scale-105 shadow-lg min-h-[44px]">
-              <Search size={18} className="shrink-0" />
-              <span>Discover Business</span>
-            </button>
-            <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white border border-border text-midnight rounded-full px-6 xs:px-8 py-3.5 xs:py-4 font-medium text-sm xs:text-base transition-all hover:bg-muted hover:scale-105 min-h-[44px]">
+            <Link to="/search">
+              <motion.button 
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-forest text-white rounded-full px-6 xs:px-8 py-3.5 xs:py-4 font-medium text-sm xs:text-base transition-all shadow-lg min-h-[44px]"
+                whileHover={{ scale: 1.02, opacity: 0.9 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Search size={18} className="shrink-0" />
+                <span>Discover Business</span>
+              </motion.button>
+            </Link>
+            <motion.button 
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white border border-border text-midnight rounded-full px-6 xs:px-8 py-3.5 xs:py-4 font-medium text-sm xs:text-base transition-all min-h-[44px]"
+              whileHover={{ scale: 1.02, backgroundColor: "hsl(var(--muted))" }}
+              whileTap={{ scale: 0.98 }}
+            >
               <MapPin size={18} className="text-forest shrink-0" />
               <span>Select Location</span>
-            </button>
+            </motion.button>
           </motion.div>
           
           {/* Floating Avatars - Hidden below 1024px for cleaner mobile UX */}
@@ -118,7 +126,7 @@ const HeroSection = () => {
             >
               <img
                 src={avatar2}
-                alt="User"
+                alt="Happy user testimonial"
                 className="w-16 xl:w-20 h-16 xl:h-20 rounded-full border-4 border-white shadow-lg object-cover"
               />
               <svg 
@@ -142,7 +150,7 @@ const HeroSection = () => {
             >
               <img
                 src={avatar3}
-                alt="User"
+                alt="Satisfied customer"
                 className="w-14 xl:w-16 h-14 xl:h-16 rounded-full border-4 border-white shadow-lg object-cover"
               />
               <svg 
@@ -166,7 +174,7 @@ const HeroSection = () => {
             >
               <img
                 src={avatar1}
-                alt="User"
+                alt="Verified customer review"
                 className="w-16 xl:w-20 h-16 xl:h-20 rounded-full border-4 border-white shadow-lg object-cover"
               />
               <svg 

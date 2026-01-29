@@ -1,7 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { DollarSign, Star, MapPin, Package, Search, Shield, Check, Mail, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import featuresHero from "@/assets/features-hero.jpg";
 import featuresMoney from "@/assets/features-money.jpg";
@@ -50,6 +51,12 @@ const Features = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Features - RankLocal Service Comparison Platform"
+        description="Explore RankLocal's powerful features: compare pricing, check reviews, find nearby stores, and make informed decisions with smart search and filters."
+        canonical="https://ranklocal.com/features"
+        keywords="compare prices, local reviews, nearby stores, smart search, verified listings"
+      />
       <Navbar />
       
       {/* Hero Section */}
@@ -282,13 +289,26 @@ const Features = () => {
                   className="w-full flex items-center justify-between py-4 text-left"
                 >
                   <span className="font-medium text-midnight">{faq.q}</span>
-                  <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${openFaq === index ? 'rotate-180' : ''}`} />
+                  <motion.div
+                    animate={{ rotate: openFaq === index ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  </motion.div>
                 </button>
-                {openFaq === index && (
-                  <div className="pb-4 text-muted-foreground text-sm">
-                    {faq.a}
-                  </div>
-                )}
+                <AnimatePresence>
+                  {openFaq === index && (
+                    <motion.div 
+                      className="pb-4 text-muted-foreground text-sm overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {faq.a}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
