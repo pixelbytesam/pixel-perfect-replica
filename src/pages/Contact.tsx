@@ -1,13 +1,22 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { User, Mail, FileText, MessageSquare, Instagram, Linkedin, Youtube, Twitter, Home, ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { toast } from "sonner";
 import contactHero from "@/assets/contact-hero.jpg";
 import contactTeam from "@/assets/contact-team.jpg";
 
 const Contact = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
   const faqs = [
     { q: "What is this platform and how does it work?", a: "Our platform helps you discover and compare local services in your area with transparent ratings and verified reviews." },
@@ -17,8 +26,37 @@ const Contact = () => {
     { q: "Which cities and locations are currently supported?", a: "We currently support major metropolitan areas and are rapidly expanding to more locations." }
   ];
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("Please fill in all required fields", {
+        description: "Name, email, and message are required.",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    toast.success("Message sent successfully!", {
+      description: "We'll get back to you within 24 hours.",
+    });
+    
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(false);
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Contact Us - RankLocal"
+        description="Get in touch with RankLocal. We're here to help with questions about our local services comparison platform."
+        canonical="https://ranklocal.com/contact"
+        keywords="contact ranklocal, support, help, local services"
+      />
       <Navbar />
       
       {/* Hero Section */}
@@ -48,7 +86,7 @@ const Contact = () => {
             >
               <img 
                 src={contactHero} 
-                alt="Customer support team" 
+                alt="Customer support team ready to help" 
                 className="rounded-2xl shadow-card w-full h-auto object-cover"
               />
             </motion.div>
@@ -71,27 +109,31 @@ const Contact = () => {
               <h2 className="text-2xl font-bold text-midnight mb-2">Send us Message</h2>
               <p className="text-muted-foreground mb-6 text-sm">We're here to help and answer any question you might have.</p>
               
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
-                  <label className="block text-sm font-medium text-midnight mb-1">Name</label>
+                  <label className="block text-sm font-medium text-midnight mb-1">Name *</label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <input 
                       type="text" 
                       placeholder="e.g John Wick"
-                      className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-forest/20"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-forest/20 transition-all"
                     />
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-midnight mb-1">Email</label>
+                  <label className="block text-sm font-medium text-midnight mb-1">Email *</label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <input 
                       type="email" 
                       placeholder="e.g johnwick@example.com"
-                      className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-forest/20"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-forest/20 transition-all"
                     />
                   </div>
                 </div>
@@ -103,26 +145,47 @@ const Contact = () => {
                     <input 
                       type="text" 
                       placeholder="e.g Inquiry about stores listing"
-                      className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-forest/20"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-forest/20 transition-all"
                     />
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-midnight mb-1">Message</label>
+                  <label className="block text-sm font-medium text-midnight mb-1">Message *</label>
                   <div className="relative">
                     <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                     <textarea 
-                      placeholder="e.g I have an message about"
+                      placeholder="e.g I have a question about..."
                       rows={4}
-                      className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-forest/20 resize-none"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-forest/20 resize-none transition-all"
                     />
                   </div>
                 </div>
                 
-                <button type="submit" className="w-full bg-midnight text-white py-3 rounded-lg font-medium hover:bg-midnight/90 transition-colors">
-                  Send Message
-                </button>
+                <motion.button 
+                  type="submit" 
+                  className="w-full bg-midnight text-white py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 min-h-[48px]"
+                  disabled={isSubmitting}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <motion.div 
+                        className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      />
+                      Sending...
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
+                </motion.button>
               </form>
             </motion.div>
 
@@ -136,7 +199,7 @@ const Contact = () => {
             >
               <img 
                 src={contactTeam} 
-                alt="Our team" 
+                alt="Our dedicated support team" 
                 className="rounded-2xl w-full h-64 object-cover"
               />
               
@@ -157,24 +220,23 @@ const Contact = () => {
                 <div className="mb-4">
                   <p className="font-medium text-midnight mb-2">Follow Us on</p>
                   <div className="flex items-center gap-3">
-                    <a href="#" className="w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-forest hover:text-white transition-colors">
-                      <Instagram className="w-5 h-5" />
-                    </a>
-                    <a href="#" className="w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-forest hover:text-white transition-colors">
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                    <a href="#" className="w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-forest hover:text-white transition-colors">
-                      <Youtube className="w-5 h-5" />
-                    </a>
-                    <a href="#" className="w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-forest hover:text-white transition-colors">
-                      <Twitter className="w-5 h-5" />
-                    </a>
+                    {[Instagram, Linkedin, Youtube, Twitter].map((Icon, index) => (
+                      <motion.a 
+                        key={index}
+                        href="#" 
+                        className="w-10 h-10 bg-card rounded-full flex items-center justify-center hover:bg-forest hover:text-white transition-colors"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </motion.a>
+                    ))}
                   </div>
                 </div>
                 
                 <div>
                   <p className="font-medium text-midnight mb-2">Quick Support Links</p>
-                  <a href="#" className="text-sm text-muted-foreground hover:text-forest transition-colors">General FAQs</a>
+                  <a href="/faq" className="text-sm text-muted-foreground hover:text-forest transition-colors">General FAQs</a>
                 </div>
               </div>
             </motion.div>
@@ -204,13 +266,26 @@ const Contact = () => {
                   className="w-full flex items-center justify-between py-4 text-left"
                 >
                   <span className="font-medium text-midnight">{faq.q}</span>
-                  <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${openFaq === index ? 'rotate-180' : ''}`} />
+                  <motion.div
+                    animate={{ rotate: openFaq === index ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  </motion.div>
                 </button>
-                {openFaq === index && (
-                  <div className="pb-4 text-muted-foreground text-sm">
-                    {faq.a}
-                  </div>
-                )}
+                <AnimatePresence>
+                  {openFaq === index && (
+                    <motion.div 
+                      className="pb-4 text-muted-foreground text-sm overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {faq.a}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
@@ -220,7 +295,13 @@ const Contact = () => {
       {/* CTA Section */}
       <section className="py-16 lg:py-20">
         <div className="section-container">
-          <div className="bg-card rounded-3xl p-8 lg:p-12 text-center max-w-4xl mx-auto">
+          <motion.div 
+            className="bg-card rounded-3xl p-8 lg:p-12 text-center max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="text-3xl lg:text-4xl font-bold text-midnight mb-4">
               Got Your Answer?
             </h2>
@@ -228,16 +309,26 @@ const Contact = () => {
               Great! You can return to the homepage to continue exploring, or let us know how we did—your feedback helps us serve you better.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="/" className="btn-forest flex items-center gap-2">
+              <motion.a 
+                href="/" 
+                className="btn-forest flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 <Home className="w-4 h-4" />
                 Go to Home
-              </a>
-              <a href="/feedback" className="flex items-center gap-2 bg-white border border-border text-midnight px-6 py-3 rounded-full font-medium hover:bg-card transition-colors">
+              </motion.a>
+              <motion.a 
+                href="/feedback" 
+                className="flex items-center gap-2 bg-white border border-border text-midnight px-6 py-3 rounded-full font-medium hover:bg-card transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 <MessageSquare className="w-4 h-4" />
                 Share Feedback
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 

@@ -1,24 +1,22 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AnimatedWordProps {
   speed?: number; // Duration in milliseconds per word
 }
 
+const words = [
+  "Hospital",
+  "Hotel",
+  "Salon",
+  "Car Servicing",
+  "Cloth Shops",
+  "Agri Equipments",
+];
+
 const AnimatedWord = ({ speed = 1800 }: AnimatedWordProps) => {
-  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  
-  const words = [
-    t.hospital,
-    t.hotel,
-    t.salon,
-    t.carServicing,
-    t.clothShops,
-    t.agriEquipments,
-  ];
 
   useEffect(() => {
     if (isPaused) return;
@@ -28,7 +26,7 @@ const AnimatedWord = ({ speed = 1800 }: AnimatedWordProps) => {
     }, speed);
 
     return () => clearInterval(interval);
-  }, [words.length, speed, isPaused]);
+  }, [speed, isPaused]);
 
   return (
     <span 
@@ -45,7 +43,7 @@ const AnimatedWord = ({ speed = 1800 }: AnimatedWordProps) => {
             exit={{ y: -40, opacity: 0 }}
             transition={{ 
               duration: 0.4, 
-              ease: [0.25, 0.46, 0.45, 0.94]
+              ease: "easeOut"
             }}
             className="inline-block text-forest"
           >

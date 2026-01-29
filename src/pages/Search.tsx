@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { MapPin, Home as HomeIcon, Search as SearchIcon, Filter, Star, Clock, TrendingUp, X, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import store1 from "@/assets/store-1.jpg";
 import {
   Dialog,
@@ -82,10 +84,21 @@ const Search = () => {
   }, [locationQuery, categoryQuery, filters]);
 
   const toggleStore = (id: number) => {
+    const store = allStores.find(s => s.id === id);
     if (selectedStores.includes(id)) {
       setSelectedStores(selectedStores.filter(s => s !== id));
+      toast.info(`Removed from comparison`, {
+        description: store?.name,
+      });
     } else if (selectedStores.length < 4) {
       setSelectedStores([...selectedStores, id]);
+      toast.success(`Added to comparison`, {
+        description: `${store?.name} (${selectedStores.length + 1}/4)`,
+      });
+    } else {
+      toast.warning("Maximum 4 stores allowed", {
+        description: "Remove a store to add another.",
+      });
     }
   };
 
@@ -100,6 +113,12 @@ const Search = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Search Local Services - RankLocal"
+        description="Search and discover trusted local services near you. Compare businesses, read reviews, and find the best options in your area."
+        canonical="https://ranklocal.com/search"
+        keywords="search local services, find businesses, compare stores, local search"
+      />
       <Navbar />
       
       {/* Hero Section */}
